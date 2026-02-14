@@ -1,0 +1,44 @@
+* Host localhost:8080 was resolved.
+* IPv6: ::1
+* IPv4: 127.0.0.1
+  % Total    % Received % Xferd  Average Speed  Time    Time    Time   Current
+                                 Dload  Upload  Total   Spent   Left   Speed
+  0      0   0      0   0      0      0      0                              0*   Trying [::1]:8080...
+* connect to ::1 port 8080 from ::1 port 37912 failed: Connection refused
+*   Trying 127.0.0.1:8080...
+* Established connection to localhost (127.0.0.1 port 8080) from 127.0.0.1 port 37696 
+* using HTTP/1.x
+> GET /q/health HTTP/1.1
+> Host: localhost:8080
+> User-Agent: curl/8.18.0
+> Accept: */*
+> 
+* Request completely sent off
+  0      0   0      0   0      0      0      0           00:01              0  0      0   0      0   0      0      0      0           00:02              0< HTTP/1.1 503 Service Unavailable
+< content-type: application/json; charset=UTF-8
+< cache-control: no-store
+< content-length: 720
+< 
+{ [720 bytes data]
+100    720 100    720   0      0    303      0   00:02   00:02            303100    720 100    720   0      0    303      0   00:02   00:02            303100    720 100    720   0      0    303      0   00:02   00:02            303
+* Connection #0 to host localhost:8080 left intact
+{
+    "status": "DOWN",
+    "checks": [
+        {
+            "name": "Oracle Database Connection",
+            "status": "DOWN",
+            "data": {
+                "error": "ORA-01017: invalid credential or not authorized; logon denied\n\nhttps://docs.oracle.com/error-help/db/ora-01017/",
+                "connection": "failed"
+            }
+        },
+        {
+            "name": "Database connections health check",
+            "status": "DOWN",
+            "data": {
+                "<default>": "Unable to execute the validation check for the default DataSource: ORA-01017: invalid credential or not authorized; logon denied\n\nhttps://docs.oracle.com/error-help/db/ora-01017/"
+            }
+        }
+    ]
+}

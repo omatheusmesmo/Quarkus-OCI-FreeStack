@@ -1,6 +1,6 @@
 # 🚀 Quarkus OCI FreeStack: The Ultimate Cloud-Native Showcase
 
-> **Building a State-of-the-Art Microservice on Oracle Cloud Always Free Tier**
+> **Building a State-of-the-Art Cloud-Native Backend on Oracle Cloud Always Free Tier**
 
 This project demonstrates how to build a high-performance, **Cloud-Native Backend** using **Quarkus** (Java 21) that leverages the full power of **Oracle Cloud Infrastructure (OCI)**. 
 
@@ -87,13 +87,13 @@ Follow these steps to run the current version of the project.
 
 ## 🔧 Technology Stack
 
-| Component | Technology | OCI Service |
-| :--- | :--- | :--- |
-| **Runtime** | Quarkus (Java 21) | Ampere A1 Compute (ARM) |
-| **Database** | Hibernate ORM Panache | Autonomous Database (ATP) |
-| **API** | RESTEasy Reactive | - |
-| **Observability** | SmallRye Health | OCI Monitoring |
-| **Build** | Maven | - |
+| Component         | Technology            | OCI Service               |
+| :---------------- | :-------------------- | :------------------------ |
+| **Runtime**       | Quarkus (Java 21)     | Ampere A1 Compute (ARM)   |
+| **Database**      | Hibernate ORM Panache | Autonomous Database (ATP) |
+| **API**           | RESTEasy Reactive     | -                         |
+| **Observability** | SmallRye Health       | OCI Monitoring            |
+| **Build**         | Maven                 | -                         |
 
 ---
 
