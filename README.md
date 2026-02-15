@@ -35,8 +35,12 @@ We are building this iteratively. Here is the current progress:
 - **Tech:** Hibernate ORM Panache + Oracle 26ai JSON Support + Flyway.
 - **Feature:** Implemented Article CRUD where flexible content is stored as native JSON and queried using SQL/JSON path expressions (`json_exists`).
 
+### 🔐 Phase 3: Zero Trust Security with Vault (Next)
+- **Goal:** Remove all sensitive credentials (like DB passwords) from the source code and environment files.
+- **Tech:** OCI Java SDK + OCI Vault + Instance Principals.
+- **Feature:** The application will authenticate with OCI at startup, retrieve secrets from the Vault, and inject them into the connection pool dynamically.
+
 ### 🔮 Future Phases
-- **Phase 3 (Security):** Integrate **OCI Vault** to remove `.env` secrets.
 - **Phase 4 (Media):** Implement **Object Storage** pattern for image uploads.
 - **Phase 5 (Events):** Publish "Article Created/Updated" events to **OCI Streaming**.
 - **Phase 6 (Production):** Deploy **Native Binary** to an OCI **Ampere A1 Compute** instance.
