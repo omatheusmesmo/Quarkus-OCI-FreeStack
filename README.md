@@ -28,15 +28,15 @@ We are building this iteratively. Here is the current progress:
 ### ✅ Phase 1: The Reactive Foundation (Completed)
 - **Goal:** Establish a secure, reactive connection to Oracle Autonomous Database (ATP) using mTLS.
 - **Tech:** Quarkus JDBC Oracle, Agroal Pool, SmallRye Health.
-- **Status:** **Ready!** The application connects, validates certificates via Wallet, and exposes health checks.
+- **Status:** **Ready!**
 
-### 🔜 Phase 2: The Converged Data Model (Next)
+### ✅ Phase 2: The Converged Data Model (Completed)
 - **Goal:** Create a hybrid data model mixing standard JPA Entities with native JSON storage.
-- **Tech:** Hibernate ORM Panache + Oracle JSON support.
-- **Feature:** Store flexible article content as JSON docs while querying them using standard SQL.
+- **Tech:** Hibernate ORM Panache + Oracle 26ai JSON Support + Flyway.
+- **Feature:** Implemented Article CRUD where flexible content is stored as native JSON and queried using SQL/JSON path expressions (`json_exists`).
 
 ### 🔮 Future Phases
-- **Phase 3 (Security):** Integrate **OCI Vault** to remove `application.properties` secrets.
+- **Phase 3 (Security):** Integrate **OCI Vault** to remove `.env` secrets.
 - **Phase 4 (Media):** Implement **Object Storage** pattern for image uploads.
 - **Phase 5 (Events):** Publish "Article Created/Updated" events to **OCI Streaming**.
 - **Phase 6 (Production):** Deploy **Native Binary** to an OCI **Ampere A1 Compute** instance.
