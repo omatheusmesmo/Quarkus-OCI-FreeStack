@@ -119,5 +119,5 @@ curl "http://localhost:8080/articles/search?tag=java"
 ---
 
 <p align="center">
-  <i>Developed with ❤️ for the Cloud Native Community</i>
+  <i>Developed with ❤️ by Matheus Oliveira for the Cloud Native Community</i>
 </p>
