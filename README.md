@@ -27,7 +27,7 @@ We are building this iteratively. Here is the current progress:
 
 ### ✅ Phase 1: The Reactive Foundation (Completed)
 - **Goal:** Establish a secure, reactive connection to Oracle Autonomous Database (ATP) using mTLS.
-- **Tech:** Quarkus JDBC Oracle, Agroal Pool, SmallRye Health.
+- **Tech:** Quarkus REST, Agroal Pool, SmallRye Health.
 - **Status:** **Ready!**
 
 ### ✅ Phase 2: The Converged Data Model (Completed)
@@ -40,31 +40,27 @@ We are building this iteratively. Here is the current progress:
 - **Tech:** OCI Java SDK + OCI Vault + Instance Principals.
 - **Feature:** The application will authenticate with OCI at startup, retrieve secrets from the Vault, and inject them into the connection pool dynamically.
 
-### 🔮 Future Phases
-- **Phase 4 (Media):** Implement **Object Storage** pattern for image uploads.
-- **Phase 5 (Events):** Publish "Article Created/Updated" events to **OCI Streaming**.
-- **Phase 6 (Production):** Deploy **Native Binary** to an OCI **Ampere A1 Compute** instance.
-
 ---
 
-## 🛠️ Getting Started (Phase 1)
+## 🛠️ Getting Started
 
 Follow these steps to run the current version of the project.
 
 ### Prerequisites
-1.  **Java 21** & **Maven 3.8+**
-2.  **Oracle Cloud Account** (Always Free)
-3.  **Oracle Autonomous Database** instance created (Workload: **Transaction Processing**)
+1.  **Java 21** (GraalVM recommended for native builds)
+2.  **Maven 3.9+**
+3.  **Oracle Cloud Account** (Always Free Tier)
+4.  **Oracle Autonomous Database** (ATP) instance version **26ai**
 
 ### Setup Instructions
 
-1.  **Clone resources:**
+1.  **Download & Configure Wallet:**
     - Download your **DB Wallet** from OCI Console.
-    - Extract it to `src/main/resources/wallet/`.
+    - Extract its content to `src/main/resources/wallet/`.
 
-2.  **Configure Credentials:**
+2.  **Configure Environment:**
     - Copy the template: `cp .env.example .env`
-    - Edit `.env` with your DB password and service name (from `tnsnames.ora`).
+    - Edit `.env` with your database credentials and service name.
 
     ```bash
     DB_USERNAME=ADMIN
@@ -73,31 +69,52 @@ Follow these steps to run the current version of the project.
     DB_WALLET_PATH=src/main/resources/wallet
     ```
 
-3.  **Run in Dev Mode:**
+3.  **Run in Development Mode:**
     ```bash
     ./mvnw quarkus:dev
     ```
 
-4.  **Verify Connection:**
-    ```bash
-    # Check Database Version
-    curl http://localhost:8080/oracle/version
-    
-    # Check Health Status
-    curl http://localhost:8080/q/health/ready
-    ```
+---
+
+## 🔍 Verifying the Implementation
+
+### 1. Connectivity & Health
+```bash
+# Check Database Version (26ai)
+curl http://localhost:8080/oracle/version
+
+# Check Health Status (Readiness)
+curl http://localhost:8080/q/health/ready
+```
+
+### 2. Converged Database Features (CRUD & JSON)
+```bash
+# Create a new Article with native JSON content
+curl -X POST http://localhost:8080/articles \
+  -H "Content-Type: application/json" \
+  -d '{"title":"Cloud Native Java","author":"Matheus","content":{"tags":["java","oci"]}}'
+
+# List all articles
+curl http://localhost:8080/articles
+
+# Search articles by tag inside the JSON document
+curl "http://localhost:8080/articles/search?tag=java"
+```
 
 ---
 
 ## 🔧 Technology Stack
 
-| Component         | Technology            | OCI Service               |
-| :---------------- | :-------------------- | :------------------------ |
-| **Runtime**       | Quarkus (Java 21)     | Ampere A1 Compute (ARM)   |
-| **Database**      | Hibernate ORM Panache | Autonomous Database (ATP) |
-| **API**           | RESTEasy Reactive     | -                         |
-| **Observability** | SmallRye Health       | OCI Monitoring            |
-| **Build**         | Maven                 | -                         |
+| Component         | Technology                | OCI Service               |
+| :---------------- | :------------------------ | :------------------------ |
+| **Runtime**       | Quarkus (Java 21)         | Ampere A1 Compute (ARM)   |
+| **Database**      | Oracle Database 26ai      | Autonomous Database (ATP) |
+| **Persistence**   | Hibernate ORM Panache     | -                         |
+| **Migrations**    | Flyway                    | -                         |
+| **API**           | Quarkus REST (Jackson)    | -                         |
+| **Validation**    | Hibernate Validator       | -                         |
+| **Observability** | SmallRye Health           | OCI Monitoring            |
+| **Build**         | Maven                     | -                         |
 
 ---
 
