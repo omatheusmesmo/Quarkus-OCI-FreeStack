@@ -1,4 +1,4 @@
-package com.freestack;
+package com.freestack.infra.health;
 
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
@@ -9,9 +9,9 @@ import org.eclipse.microprofile.health.Readiness;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 /**
  * Oracle Database Health Check
@@ -34,8 +34,9 @@ public class OracleDatabaseHealthCheck implements HealthCheck {
         HealthCheckResponseBuilder responseBuilder = HealthCheckResponse.named("Oracle Database Connection");
 
         try (Connection connection = dataSource.getConnection();
-                Statement statement = connection.createStatement();
-                ResultSet resultSet = statement.executeQuery("SELECT BANNER FROM V$VERSION WHERE ROWNUM = 1")) {
+                PreparedStatement statement = connection
+                        .prepareStatement("SELECT BANNER FROM V$VERSION WHERE ROWNUM = 1");
+                ResultSet resultSet = statement.executeQuery()) {
 
             if (resultSet.next()) {
                 String oracleVersion = resultSet.getString(1);
