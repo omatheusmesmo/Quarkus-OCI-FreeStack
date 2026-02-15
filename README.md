@@ -40,6 +40,11 @@ We are building this iteratively. Here is the current progress:
 - **Tech:** OCI Java SDK + OCI Vault + Instance Principals.
 - **Feature:** The application will authenticate with OCI at startup, retrieve secrets from the Vault, and inject them into the connection pool dynamically.
 
+### 🔮 Future Phases
+- **Phase 4 (Media):** Implement **Object Storage** pattern for image uploads using Pre-Authenticated Requests (PARs).
+- **Phase 5 (Events):** Publish "Article Created/Updated" events to **OCI Streaming** (Kafka-compatible).
+- **Phase 6 (Production):** Deploy **Native Binary** to an OCI **Ampere A1 Compute** (ARM) instance.
+
 ---
 
 ## 🛠️ Getting Started
